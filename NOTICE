@@ -1,0 +1,19 @@
+Crele Nimbus
+Copyright 2026 Crele
+
+This code is released under the Apache License, Version 2.0 (LICENSE).
+
+It includes or follows the work of others:
+
+- src/crele_nimbus/speaker/DTDNN.py and layers.py are copied from 3D-Speaker
+  (https://github.com/modelscope/3D-Speaker), Copyright 3D-Speaker, Apache License 2.0,
+  with their headers kept; src/crele_nimbus/speaker/PROVENANCE.md records the commit,
+  the hashes and the one changed import line.
+- src/crele_nimbus/listener.py follows the structure of the Dasheng audio encoder
+  (https://github.com/XiaoMi/dasheng), Copyright 2024 Xiaomi Corporation, Apache
+  License 2.0: the same module names, blocks and front end, with a chunked causal
+  attention mask and a streaming cache written here.
+
+The weights this code runs (https://huggingface.co/crele/nimbus-v1), and the models and
+datasets they were made with, are attributed in that repository's own NOTICE and model
+card.

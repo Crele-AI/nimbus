@@ -1,0 +1,57 @@
+[project]
+name = "crele-nimbus"
+version = "1.0.0"
+description = "Crele Nimbus: real-time yes/no questions about live audio"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [{ name = "Crele" }]
+keywords = ["audio", "streaming", "voice-agents", "sound-event-detection", "voice-activity-detection"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Sound/Audio :: Analysis",
+]
+dependencies = [
+    "torch>=2.4",
+    "numpy>=1.26",
+    "safetensors>=0.4",
+    "huggingface_hub>=0.25",
+    "transformers>=4.51",
+    "websockets>=13",
+    "soundfile>=0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.urls]
+Homepage = "https://github.com/Crele-AI/nimbus"
+Weights = "https://huggingface.co/crele/nimbus-v1"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"crele_nimbus.playground" = ["static/*", "README.md"]
+"crele_nimbus.speaker" = ["PROVENANCE.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+# The CAM++ model code is a faithful copy of 3D-Speaker's (src/crele_nimbus/speaker/PROVENANCE.md).
+# It is never edited here, so it is not linted or formatted here either.
+extend-exclude = ["src/crele_nimbus/speaker/DTDNN.py", "src/crele_nimbus/speaker/layers.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
