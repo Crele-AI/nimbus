@@ -9,7 +9,8 @@ signals follow the user and everyone else, live.
 Built for voice agents: barge-in, end of turn, background sounds, another voice in the
 room. Open weights, Apache-2.0, real time on a laptop CPU.
 
-The weights: [huggingface.co/crele/nimbus-v1](https://huggingface.co/crele/nimbus-v1).
+Website: [crele.co/models/nimbus](https://crele.co/models/nimbus) · Weights:
+[huggingface.co/crele/nimbus-v1](https://huggingface.co/crele/nimbus-v1)
 
 ![The playground: a row per question answers yes or no as the audio plays](docs/media/playground.gif)
 

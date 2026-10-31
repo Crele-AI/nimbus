@@ -27,7 +27,8 @@ dependencies = [
 dev = ["pytest>=8.0", "ruff>=0.6"]
 
 [project.urls]
-Homepage = "https://github.com/Crele-AI/nimbus"
+Homepage = "https://crele.co/models/nimbus"
+Source = "https://github.com/Crele-AI/nimbus"
 Weights = "https://huggingface.co/crele/nimbus-v1"
 
 [build-system]
