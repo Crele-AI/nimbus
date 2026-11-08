@@ -3,6 +3,7 @@
 
     python examples/stream_file.py recording.wav -q "Is music playing?" -q "Is someone laughing?"
     python examples/stream_file.py call.wav --voice me.wav      # makes the "user" row answer
+    python examples/stream_file.py recording.wav --device cuda  # on an NVIDIA GPU
 
 The file must be 16 kHz mono (resample first, for example with
 `ffmpeg -i in.mp3 -ac 1 -ar 16000 out.wav`). Audio is pushed 80 ms at a time, as a live
@@ -39,11 +40,12 @@ def main() -> None:
     )  # fmt: skip
     ap.add_argument("--voice", help="a clip of the user's voice, for the 'user' signal")
     ap.add_argument("--weights", default="crele/nimbus-v1", help="a repository id or a folder")
+    ap.add_argument("--device", default="cpu", help="cpu or cuda (default cpu)")
     ap.add_argument("--realtime", action="store_true", help="pace the audio at real time")
     args = ap.parse_args()
     questions = args.question or ["Is music playing?", "Is someone laughing?"]
 
-    model = Nimbus.from_pretrained(args.weights)
+    model = Nimbus.from_pretrained(args.weights, device=args.device)
     session = model.session()
     for i, text in enumerate(questions, 1):
         session.ask(f"q{i}", text)

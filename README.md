@@ -21,11 +21,19 @@ pip install git+https://github.com/Crele-AI/nimbus
 ```
 
 Python 3.10 or newer and PyTorch 2.4 or newer. Tested on a Mac CPU with Python 3.11 and
-3.14 and torch 2.8.0 and 2.15.0; CUDA (`device="cuda"`) is supported but untested.
+3.14 and torch 2.8.0 and 2.15.0, and on an NVIDIA GPU\*.
 
 Two downloads land in the Hugging Face cache on first use, 1.6 GB in all: the weights
 (0.4 GB) at `Nimbus.from_pretrained`, and the text encoder that reads the questions
 (1.2 GB) at the first `model.session()`.
+
+### On an NVIDIA GPU
+
+It runs on the CPU by default. For CUDA, pass `device="cuda"` (or `"cuda:1"` for the
+second card) to `Nimbus.from_pretrained`, or `--device cuda` to the playground and to
+`examples/stream_file.py`.
+
+\* Tested on an NVIDIA RTX PRO 4000.
 
 ## Use it
 
@@ -80,7 +88,7 @@ relying on either signal. `session.enroll(None)` forgets the voice.
 
 | Call | What it does |
 |---|---|
-| `Nimbus.from_pretrained(path_or_id, device="cpu", text_encoder=None)` | Loads the model from a Hugging Face id or a local folder. `text_encoder` names a local folder with the text encoder's files, for offline use |
+| `Nimbus.from_pretrained(path_or_id, device="cpu", text_encoder=None)` | Loads the model from a Hugging Face id or a local folder. `device="cuda"` runs it on an NVIDIA GPU. `text_encoder` names a local folder with the text encoder's files, for offline use |
 | `model.session()` | A new stream. Sessions are cheap; the model is shared between them |
 | `session.ask(id, text, yes_means=None, no_means=None, **settings)` | Adds or replaces a question. Ids start with a letter and use letters, digits, `_` and `-`; `user` and `other` are taken. At most 32 questions per session |
 | `session.remove(id)`, `session.tune(id, **settings)` | Drops a question; changes its settings without disturbing its events |
